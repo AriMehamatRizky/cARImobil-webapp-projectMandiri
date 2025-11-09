@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -44,5 +45,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Mobil yang di-wishlist oleh user.
+     */
+    public function wishlistCars(): BelongsToMany
+    {
+        return $this->belongsToMany(Car::class, 'wishlists');
+    }
+
+    /**
+     * Helper untuk cek apakah user sudah wishlist mobil tertentu.
+     */
+    public function hasInWishlist(Car $car): bool
+    {
+        return $this->wishlistCars()->where('car_id', $car->id)->exists();
     }
 }
