@@ -17,4 +17,12 @@ class Car extends Model
     {
         return $this->hasMany(CarImage::class);
     }
+
+    public function getCarouselImages(): \Illuminate\Support\Collection
+    {
+        $gallery = $this->images->pluck('path');
+
+        // Tambahkan 'main_image' ke awal collection
+        return $gallery->prepend($this->main_image);
+    }
 }
