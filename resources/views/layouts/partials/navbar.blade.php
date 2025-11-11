@@ -3,7 +3,7 @@
         <div class="flex justify-between items-center h-20">
             <div class="flex-shrink-0 flex items-center">
                 <a href="{{ route('home') }}">
-                    <span class="text-3xl font-bold text-white">c<span class="text-brand-orange">ARI</span>mobil</span>
+                    <img src="{{ asset('img/logocARImobil.png') }}" alt="cARImobil Logo" class="h-14 w-auto rounded-full">
                 </a>
             </div>
 
@@ -143,7 +143,7 @@
                     <a href="{{ route('register') }}"
                         class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Register</a>
                 </div>
-                @endauth
-            </div>
+            @endauth
         </div>
-    </nav>
+    </div>
+</nav>
