@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Mail\SendOtpMail;
+use Illuminate\Support\Facades\Mail;
 
 class RegisteredUserController extends Controller
 {
@@ -31,20 +33,34 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // Buat Kode OTP
+        $otpCode = rand(100000, 999999);
+        $otpExpiresAt = now()->addMinutes(10);
+
+        // Buat user
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'otp_code' => $otpCode, // Simpan OTP
+            'otp_expires_at' => $otpExpiresAt, // Simpan waktu kedaluwarsa
         ]);
 
-        event(new Registered($user));
+        // Kirim email OTP (akan ditangkap oleh Mailpit)
+        try {
+            Mail::to($user->email)->send(new SendOtpMail((string) $otpCode));
+        } catch (\Exception $e) {
+            // Handle jika email gagal kirim, mungkin log error
+        }
 
-        Auth::login($user);
+        // Simpan email user di session untuk halaman verifikasi
+        $request->session()->put('otp_user_email', $user->email);
 
-        return redirect(route('dashboard', absolute: false));
+        // arahkan ke halaman verifikasi OTP
+        return redirect()->route('otp.verification.notice');
     }
 }
