@@ -10,8 +10,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // Ambil 8 mobil terbaru (termasuk relasi brand) sebagai 'populer'
-        $popularCars = Car::with('brand')->latest()->take(8)->get();
+        // Ambil 5 mobil terbaru (termasuk relasi brand) sebagai 'populer'
+        $popularCars = Car::with('brand')->latest()->take(5)->get();
 
         // Ambil 6 merek dengan jumlah mobil terbanyak
         $brands = Brand::withCount('cars') // Menghitung jumlah mobil di relasi 'cars'

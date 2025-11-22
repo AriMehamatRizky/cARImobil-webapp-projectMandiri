@@ -63,7 +63,7 @@ class OtpVerificationController extends Controller
         // Login-kan user
         Auth::login($user);
 
-        return redirect()->intended(route('dashboard'));
+        return redirect()->intended(route('home'));
     }
 
     /**

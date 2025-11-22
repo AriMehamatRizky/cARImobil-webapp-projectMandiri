@@ -1,6 +1,6 @@
 <x-guest-layout>
     <a href="/">
-        <img src="{{ asset('images/carimobil_logo.png') }}" alt="cARImobil Logo"
+        <img src="{{ asset('img/logocARImobil.png') }}" alt="cARImobil Logo"
             class="w-20 h-20 mx-auto rounded-full shadow-md">
     </a>
 
@@ -8,8 +8,7 @@
         Terima kasih telah mendaftar! Kami telah mengirimkan kode OTP 6 digit ke email Anda:
         <strong>{{ $email ?? session('otp_user_email') }}</strong>.
         <br><br>
-        Silakan periksa inbox (atau Mailpit di <a href="http://127.0.0.1:8025" target="_blank"
-            class="underline text-brand-orange">http://127.0.0.1:8025</a>) dan masukkan kode di bawah ini untuk
+        Silakan periksa inbox dan masukkan kode di bawah ini untuk
         memverifikasi akun Anda.
     </div>
 
