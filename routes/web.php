@@ -7,6 +7,9 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\Auth\OtpVerificationController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CompareController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CarController as AdminCarController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/cars', [CarController::class, 'index'])->name('cars.index');
@@ -28,6 +31,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/compare/{car}', [CompareController::class, 'add'])->name('compare.add');
     Route::post('/compare/remove/{car}', [CompareController::class, 'remove'])->name('compare.remove');
     Route::get('/compare/clear', [CompareController::class, 'clear'])->name('compare.clear');
+
+    Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+
+        // Admin Dashboard
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::resource('/cars', AdminCarController::class);
+
+        // Admin Manajemen User
+        Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+        Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
+    });
 });
 
 require __DIR__ . '/auth.php';

@@ -2,6 +2,7 @@ import './bootstrap';
 
 import Alpine from 'alpinejs';
 import Splide from '@splidejs/splide';
+import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 
 window.Alpine = Alpine;
 Alpine.start();
@@ -9,38 +10,41 @@ Alpine.start();
 // Inisialisasi semua Splide carousel saat halaman dimuat
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Untuk carousel utama (misal: di landing page)
-    document.querySelectorAll('.splide-main').forEach(carousel => {
+    const mainCarousels = document.querySelectorAll('.splide-main');
+
+    mainCarousels.forEach(carousel => {
         new Splide(carousel, {
             type: 'loop',
-            perPage: 4, // Tampilkan 4
-            perMove: 1,
-            gap: '1.5rem',
-            pagination: false, // Sembunyikan titik-titik
-            autoplay: true,
-            breakpoints: {
-                1024: {
-                    perPage: 3,
-                },
-                768: {
-                    perPage: 2,
-                },
-                640: {
-                    perPage: 1,
-                },
+            drag: 'free', // Agar user bisa geser manual dengan bebas
+            focus: 'center',
+            perPage: 3,
+            gap: '2rem',
+            pagination: false,
+            arrows: false,
+
+            // Konfigurasi Auto Scroll
+            autoScroll: {
+                speed: 1,
+                pauseOnHover: true, // Berhenti saat mouse diarahkan ke mobil
+                rewind: false,
             },
-        }).mount();
+
+            breakpoints: {
+                1024: { perPage: 2, gap: '1.5rem' },
+                640: { perPage: 1, gap: '1rem' },
+            },
+        }).mount({ AutoScroll });
     });
 
     // Untuk carousel di dalam card mobil
     document.querySelectorAll('.splide-card').forEach(carousel => {
         new Splide(carousel, {
-            type: 'fade', // Efek fade
+            type: 'fade',
             rewind: true,
-            pagination: true, // Tampilkan titik-titik
-            arrows: false, // Sembunyikan panah
-            width: '100%',
-            height: '224px', // Sesuaikan dengan tinggi gambar di card (h-56)
+            pagination: false,
+            arrows: false,
+            cover: true,
+            height: '240px',
         }).mount();
     });
 

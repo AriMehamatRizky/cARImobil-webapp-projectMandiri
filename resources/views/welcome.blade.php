@@ -26,7 +26,7 @@
             <h2 class="text-3xl font-bold text-center text-brand-dark mb-10">Baru Ditambahkan</h2>
 
             @if ($popularCars->count())
-                <div classsection="splide splide-main" role="group" aria-label="Mobil Populer">
+                <div class="splide splide-main" role="group" aria-label="Mobil Populer">
                     <div class="splide__track">
                         <ul class="splide__list">
                             @foreach ($popularCars as $car)
