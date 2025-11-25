@@ -7,6 +7,7 @@ use App\Models\Car;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\CarImage;
 
 class CarController extends Controller
 {
@@ -39,8 +40,8 @@ class CarController extends Controller
             'mileage' => 'required|string|max:100',
             'color' => 'required|string|max:100',
             'description' => 'required|string',
-            'main_image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048', // 2MB max
-            'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048' // Validasi untuk multiple images
+            'main_image' => 'required|image|mimes:jpeg,png,jpg,webp|max:20480', // 20MB max
+            'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:20480' // Validasi untuk multiple images
         ]);
 
         // Simpan Gambar Utama
@@ -64,7 +65,7 @@ class CarController extends Controller
         return redirect()->route('admin.cars.index')->with('status', 'Mobil baru berhasil ditambahkan.');
     }
 
-    
+
     // Menampilkan form untuk mengedit mobil (Halaman 'Update').
     public function edit(Car $car)
     {
@@ -88,8 +89,8 @@ class CarController extends Controller
             'mileage' => 'required|string|max:100',
             'color' => 'required|string|max:100',
             'description' => 'required|string',
-            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048', // Boleh kosong
-            'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048'
+            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:20480', // Boleh kosong
+            'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:20480'
         ]);
 
         // Cek & Update Gambar Utama (jika ada yg baru)
@@ -117,21 +118,15 @@ class CarController extends Controller
     }
 
 
-    public function destroy(Car $car)
+    public function destroyImage(CarImage $carImage)
     {
-        // Hapus Gambar Utama dari storage
-        Storage::disk('public')->delete($car->main_image);
-
-        // Hapus Semua Gambar Galeri dari storage
-        foreach ($car->images as $image) {
-            Storage::disk('public')->delete($image->path);
+        if (Storage::disk('public')->exists($carImage->path)) {
+            Storage::disk('public')->delete($carImage->path);
         }
-        // Relasi di database akan terhapus otomatis via 'onDelete('cascade')'
 
-        // Hapus Data Mobil dari database
-        $car->delete();
+        $carImage->delete(); // Hanya menghapus 1 baris gambar
 
-        return redirect()->route('admin.cars.index')->with('status', 'Mobil berhasil dihapus.');
+        return back()->with('status', 'Gambar galeri berhasil dihapus.');
     }
 
     public function show(Car $car)
