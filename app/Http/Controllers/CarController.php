@@ -51,8 +51,46 @@ class CarController extends Controller
             $query->where('year', '<=', $request->year_to);
         }
 
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('model', 'like', '%' . $request->search . '%')
+                    ->orWhereHas('brand', fn($bq) => $bq->where('name', 'like', '%' . $request->search . '%'));
+            });
+        }
+        if ($request->filled('brand')) {
+            $query->whereHas('brand', fn($q) => $q->where('slug', $request->brand));
+        }
+        if ($request->filled('price_from')) {
+            $query->where('price', '>=', $request->price_from);
+        }
+        if ($request->filled('price_to')) {
+            $query->where('price', '<=', $request->price_to);
+        }
+
+        $sort = $request->get('sort', 'newest'); // Default 'newest' jika kosong
+
+        switch ($sort) {
+            case 'lowest_price':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'highest_price':
+                $query->orderBy('price', 'desc');
+                break;
+            case 'oldest_year':
+                $query->orderBy('year', 'asc');
+                break;
+            case 'newest_year': // Tahun terbaru
+                $query->orderBy('year', 'desc');
+                break;
+            default: // 'newest' (Data input terbaru)
+                $query->latest();
+                break;
+        }
+
+
         // Ambil data dengan paginasi, withQueryString() agar filter tetap ada saat pindah halaman paginasi
         $cars = $query->latest()->paginate(12)->withQueryString();
+        $brands = Brand::orderBy('name', 'asc')->get();
 
         // Ambil semua merek untuk dropdown filter
         $brands = Brand::orderBy('name', 'asc')->get();

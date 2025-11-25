@@ -48,10 +48,9 @@
                            {{ request()->routeIs('admin.cars.*')
                                ? 'bg-brand-orange text-white'
                                : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
-                    <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125V14.25m-17.25 4.5v-1.875a3.375 3.375 0 003.375-3.375h1.5a1.125 1.125 0 011.125 1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375m17.25 4.5v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5c0-.621.504-1.125 1.125-1.125h1.5a3.375 3.375 0 003.375-3.375V6.375c0-1.621-1.354-2.936-3.032-2.936h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 003.375 3.375v1.875c0 1.621-1.354 2.936-3.032 2.936h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5a1.125 1.125 0 01-1.125 1.125H.75m19.5 0v.01M12 12V4.5" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="-1 -4 24 24">
+                        <path fill="#ffffffff" 
+                            d="M14.5 6.497h.5v-.139l-.071-.119l-.429.258Zm-14 0l-.429-.258L0 6.36v.138h.5Zm2.126-3.541l-.429-.258l.429.258Zm9.748 0l.429-.258l-.429.258ZM3.5 11.5V11H3v.5h.5Zm8 0h.5V11h-.5v.5ZM14 6.497V12.5h1V6.497h-1ZM.929 6.754l2.126-3.54l-.858-.516L.071 6.24l.858.515ZM5.198 2h4.604V1H5.198v1Zm6.747 1.213l2.126 3.541l.858-.515l-2.126-3.54l-.858.514ZM2.5 13h-1v1h1v-1Zm.5-1.5v1h1v-1H3ZM13.5 13h-1v1h1v-1Zm-1.5-.5v-1h-1v1h1Zm-.5-1.5h-8v1h8v-1ZM1 12.5V6.497H0V12.5h1Zm11.5.5a.5.5 0 0 1-.5-.5h-1a1.5 1.5 0 0 0 1.5 1.5v-1Zm-10 1A1.5 1.5 0 0 0 4 12.5H3a.5.5 0 0 1-.5.5v1Zm-1-1a.5.5 0 0 1-.5-.5H0A1.5 1.5 0 0 0 1.5 14v-1ZM9.802 2a2.5 2.5 0 0 1 2.143 1.213l.858-.515A3.5 3.5 0 0 0 9.802 1v1ZM3.055 3.213A2.5 2.5 0 0 1 5.198 2V1a3.5 3.5 0 0 0-3 1.698l.857.515ZM14 12.5a.5.5 0 0 1-.5.5v1a1.5 1.5 0 0 0 1.5-1.5h-1ZM2 10h3V9H2v1Zm11-1h-3v1h3V9ZM3 7h9V6H3v1Z" />
                     </svg>
                     <span>Manajemen Mobil</span>
                 </a>
@@ -61,10 +60,14 @@
                            {{ request()->routeIs('admin.users.*')
                                ? 'bg-brand-orange text-white'
                                : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
-                    <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.003c0 1.113.285 2.16.786 3.07M15 19.128H12.75l-.612.163a.75.75 0 01-1.026-.74v-3.192c0-.983.654-1.823 1.575-2.088a9.337 9.337 0 003.483.332zM9 11.25a3 3 0 100-6 3 3 0 000 6zM9 11.25a3 3 0 100-6 3 3 0 000 6zM9 11.25v.003c0 1.113.285 2.16.786 3.07M9 11.25v-.003c0-1.113-.285-2.16-.786-3.07M9 11.25H6.75l-.612.163a.75.75 0 01-1.026-.74v-3.192c0-.983.654-1.823 1.575-2.088a9.337 9.337 0 003.483.332zM12 14.25a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75v-.008z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                        fill="#303030">
+                        <g fill="#f9f9f9ff" fill-rule="evenodd">
+                            <path
+                                d="M13.689 11.132c1.155 1.222 1.953 2.879 2.183 4.748a1.007 1.007 0 0 1-1 1.12H3.007a1.005 1.005 0 0 1-1-1.12c.23-1.87 1.028-3.526 2.183-4.748c.247.228.505.442.782.633c-1.038 1.069-1.765 2.55-1.972 4.237L14.872 16c-.204-1.686-.93-3.166-1.966-4.235a7.01 7.01 0 0 0 .783-.633M8.939 1c1.9 0 3 2 4.38 2.633a2.483 2.483 0 0 1-1.88.867c-.298 0-.579-.06-.844-.157A3.726 3.726 0 0 1 7.69 5.75c-1.395 0-3.75.25-3.245-1.903C5.94 3 6.952 1 8.94 1" />
+                            <path
+                                d="M8.94 2c2.205 0 4 1.794 4 4s-1.795 4-4 4c-2.207 0-4-1.794-4-4s1.793-4 4-4m0 9A5 5 0 1 0 8.937.999A5 5 0 0 0 8.94 11" />
+                        </g>
                     </svg>
                     <span>Manajemen User</span>
                 </a>
@@ -112,8 +115,20 @@
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
-                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                <div>{{ Auth::user()->name }}</div>
+                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-800 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+
+                                @if (Auth::user()->avatar)
+                                    <img class="h-8 w-8 rounded-full object-cover mr-2 border border-gray-300"
+                                        src="{{ Storage::url(Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                                @else
+                                    <div
+                                        class="h-8 w-8 rounded-full bg-brand-orange text-white flex items-center justify-center mr-2 font-bold text-sm shadow-sm">
+                                        {{ substr(Auth::user()->name, 0, 1) }}
+                                    </div>
+                                @endif
+
+                                <div class="font-semibold">{{ Auth::user()->name }}</div>
+
                                 <div class="ms-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20">
@@ -122,6 +137,7 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </div>
+
                             </button>
                         </x-slot>
 

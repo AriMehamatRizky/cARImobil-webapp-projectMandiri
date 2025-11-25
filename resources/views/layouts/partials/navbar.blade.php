@@ -31,6 +31,31 @@
                 @endguest
 
                 @auth
+
+                    <a href="{{ route('compare.index') }}"
+                        class="relative p-1 rounded-full text-gray-300 hover:text-white focus:outline-none transition duration-150 mr-4 group"
+                        title="Bandingkan Mobil">
+                        <span class="sr-only">Bandingkan</span>
+
+                        <svg class="h-6 w-6 group-hover:text-brand-orange transition-colors"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
+                        </svg>
+
+                        @php
+                            $compareCount = count(session('compare.cars', []));
+                        @endphp
+
+                        @if ($compareCount > 0)
+                            <span
+                                class="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 text-xs font-bold leading-none text-white transform bg-brand-orange rounded-full shadow-sm border border-brand-dark">
+                                {{ $compareCount }}
+                            </span>
+                        @endif
+                    </a>
+
                     <a href="{{ route('wishlist.index') }}"
                         class="p-1 rounded-full text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-dark focus:ring-white">
                         <span class="sr-only">Wishlist</span>
@@ -44,8 +69,20 @@
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
-                                class="ml-4 flex items-center text-sm font-medium text-gray-300 hover:text-white transition duration-150 ease-in-out">
-                                <div>{{ Auth::user()->name }}</div>
+                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-300 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+
+                                @if (Auth::user()->avatar)
+                                    <img class="h-8 w-8 rounded-full object-cover mr-2 border border-gray-300"
+                                        src="{{ Storage::url(Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                                @else
+                                    <div
+                                        class="h-8 w-8 rounded-full bg-brand-orange text-white flex items-center justify-center mr-2 font-bold text-sm shadow-sm">
+                                        {{ substr(Auth::user()->name, 0, 1) }}
+                                    </div>
+                                @endif
+
+                                <div class="font-semibold">{{ Auth::user()->name }}</div>
+
                                 <div class="ms-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20">
@@ -54,6 +91,7 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </div>
+
                             </button>
                         </x-slot>
 
@@ -102,14 +140,36 @@
             @auth
                 <div class="flex items-center px-5">
                     <div class="flex-shrink-0">
-                        <img class="h-10 w-10 rounded-full"
-                            src="https://www.gravatar.com/avatar/{{ md5(strtolower(trim(Auth::user()->email))) }}?d=mp"
-                            alt="">
+                        @if (Auth::user()->avatar)
+                            <img class="h-10 w-10 rounded-full object-cover border border-gray-500"
+                                src="{{ Storage::url(Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                        @else
+                            <div
+                                class="h-10 w-10 rounded-full bg-brand-orange text-white flex items-center justify-center font-bold text-lg border border-gray-500">
+                                {{ substr(Auth::user()->name, 0, 1) }}
+                            </div>
+                        @endif
                     </div>
                     <div class="ms-3">
                         <div class="text-base font-medium text-white">{{ Auth::user()->name }}</div>
                         <div class="text-sm font-medium text-gray-400">{{ Auth::user()->email }}</div>
                     </div>
+
+                    <a href="{{ route('compare.index') }}"
+                        class="relative ml-auto flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <span class="sr-only">Bandingkan</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
+                        </svg>
+
+                        @if ($compareCount > 0)
+                            <span
+                                class="absolute top-0 right-0 block h-2.5 w-2.5 rounded-full bg-brand-orange ring-2 ring-brand-dark"></span>
+                        @endif
+                    </a>
+
                     <a href="{{ route('wishlist.index') }}"
                         class="ms-auto flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white">
                         <span class="sr-only">Wishlist</span>
