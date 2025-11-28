@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
         // Admin Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::delete('/car-images/{carImage}', [AdminCarController::class, 'destroyImage'])->name('car-images.destroy');
+        Route::post('/cars/{car}/sold', [AdminCarController::class, 'markAsSold'])->name('cars.sold');
         Route::resource('/cars', AdminCarController::class);
 
         // Admin Manajemen User

@@ -18,6 +18,7 @@ class Car extends Model
         'slug',
         'year',
         'price',
+        'stock',
         'condition',
         'transmission',
         'engine_capacity',
@@ -50,5 +51,19 @@ class Car extends Model
     {
         $gallery = $this->images->pluck('path');
         return $gallery->prepend($this->main_image);
+    }
+
+    public function getFormattedPriceAttribute()
+    {
+        if ($this->price >= 1000000000) {
+            // Jika di atas 1 Miliar, bagi 1 Miliar dan tambah 'M'
+            return 'Rp ' . str_replace('.', ',', (string)round($this->price / 1000000000, 2)) . ' M';
+        } elseif ($this->price >= 1000000) {
+            // Jika di atas 1 Juta, bagi 1 Juta dan tambah 'jt'
+            return 'Rp ' . number_format($this->price / 1000000, 0) . ' jt';
+        }
+
+        // Jika di bawah 1 juta, tampilkan angka biasa
+        return 'Rp ' . number_format($this->price, 0, ',', '.');
     }
 }

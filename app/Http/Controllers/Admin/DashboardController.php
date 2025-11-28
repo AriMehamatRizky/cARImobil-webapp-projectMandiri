@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Car;
 use App\Models\User;
+use App\Models\Brand;
 
 class DashboardController extends Controller
 {
@@ -17,10 +18,13 @@ class DashboardController extends Controller
         // Kita hitung user biasa saja (bukan admin)
         $totalUsers = User::where('is_admin', false)->count();
 
+        $totalBrands = Brand::count();
+
         // Kirim data ke view
         return view('admin.dashboard', [
             'totalCars' => $totalCars,
             'totalUsers' => $totalUsers,
+            'totalBrands' => $totalBrands,
         ]);
     }
 }
