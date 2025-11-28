@@ -47,15 +47,17 @@
             </div>
 
             <div class="bg-white p-6 rounded-lg shadow-lg flex items-center">
-                <div class="p-3 rounded-full bg-gray-500 bg-opacity-10 text-gray-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 256 256">
-                        <path fill="#303030"
-                            d="M228 136.33A100.13 100.13 0 1 1 119.67 28a4 4 0 1 1 .66 8A92.13 92.13 0 1 0 220 135.67a4 4 0 1 1 8 .66ZM128 132h56a4 4 0 0 0 0-8h-52V72a4 4 0 0 0-8 0v56a4 4 0 0 0 4 4Zm32-88a8 8 0 1 0-8-8a8 8 0 0 0 8 8Zm36 24a8 8 0 1 0-8-8a8 8 0 0 0 8 8Zm24 36a8 8 0 1 0-8-8a8 8 0 0 0 8 8Z" />
+                <div class="p-3 rounded-full bg-purple-500 bg-opacity-10 text-purple-500">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z">
+                        </path>
                     </svg>
                 </div>
                 <div class="ml-4">
-                    <p class="text-sm font-medium text-gray-500">Aktivitas Terbaru</p>
-                    <p class="text-lg font-bold text-brand-dark">...</p>
+                    <p class="text-sm font-medium text-gray-500">Total Merek Terdaftar</p>
+                    <p class="text-3xl font-bold text-brand-dark">{{ $totalBrands }}</p>
                 </div>
             </div>
 

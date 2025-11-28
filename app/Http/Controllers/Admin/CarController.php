@@ -41,7 +41,8 @@ class CarController extends Controller
             'color' => 'required|string|max:100',
             'description' => 'required|string',
             'main_image' => 'required|image|mimes:jpeg,png,jpg,webp|max:20480', // 20MB max
-            'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:20480' // Validasi untuk multiple images
+            'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:20480', // Validasi untuk multiple images
+            'stock' => 'required|integer|min:0',
         ]);
 
         // Simpan Gambar Utama
@@ -90,7 +91,8 @@ class CarController extends Controller
             'color' => 'required|string|max:100',
             'description' => 'required|string',
             'main_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:20480', // Boleh kosong
-            'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:20480'
+            'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:20480',
+            'stock' => 'required|integer|min:0',
         ]);
 
         // Cek & Update Gambar Utama (jika ada yg baru)
@@ -132,5 +134,44 @@ class CarController extends Controller
     public function show(Car $car)
     {
         return redirect()->route('admin.cars.index');
+    }
+
+
+    public function destroy(Car $car)
+    {
+        // Hapus Gambar Utama dari penyimpanan fisik
+        if ($car->main_image && Storage::disk('public')->exists($car->main_image)) {
+            Storage::disk('public')->delete($car->main_image);
+        }
+
+        // Hapus Semua Gambar Galeri dari penyimpanan fisik
+        foreach ($car->images as $image) {
+            if (Storage::disk('public')->exists($image->path)) {
+                Storage::disk('public')->delete($image->path);
+            }
+        }
+
+        // Hapus Data Mobil dari database
+        $car->delete();
+
+        return redirect()->route('admin.cars.index')->with('status', 'Mobil berhasil dihapus.');
+    }
+
+    public function markAsSold(Car $car)
+    {
+        // Cek apakah stok masih ada
+        if ($car->stock > 0) {
+            // Kurangi stok sebanyak 1
+            $car->decrement('stock');
+            
+            // Cek sisa stok untuk pesan notifikasi
+            if ($car->stock == 0) {
+                return back()->with('status', 'Unit terjual! Stok sekarang HABIS (0).');
+            } else {
+                return back()->with('status', 'Unit terjual! Stok berkurang menjadi ' . $car->stock . '.');
+            }
+        }
+
+        return back()->with('error', 'Gagal! Stok mobil ini sudah habis.');
     }
 }

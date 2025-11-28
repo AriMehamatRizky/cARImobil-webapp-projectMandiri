@@ -58,7 +58,7 @@
             <div>
                 <span class="text-xs text-gray-400 block">Harga Cash</span>
                 <span class="text-xl font-extrabold text-brand-orange">
-                    Rp {{ number_format($car->price / 1000000, 0) }} jt
+                    {{ $car->formatted_price }}
                 </span>
             </div>
 

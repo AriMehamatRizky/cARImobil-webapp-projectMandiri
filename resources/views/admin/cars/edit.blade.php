@@ -19,7 +19,7 @@
         @endif
 
         <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
-            <h3 class="text-lg font-bold text-brand-dark mb-4 border-b pb-2">Kelola Foto Galeri</h3>
+            <h3 class="text-lg font-bold text-brand-dark mb-4 border-b pb-2">Galeri Saat Ini (Database)</h3>
 
             @if ($car->images->count() > 0)
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -53,13 +53,15 @@
         </div>
 
         <div class="bg-white p-8 rounded-lg shadow-lg">
-            <h3 class="text-lg font-bold text-brand-dark mb-6 border-b pb-2">Edit Data Mobil</h3>
+            <h3 class="text-lg font-bold text-brand-dark mb-6 border-b pb-2">Edit Data & Tambah Foto</h3>
 
-            <form action="{{ route('admin.cars.update', $car->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.cars.update', $car->id) }}" method="POST" enctype="multipart/form-data"
+                onsubmit="document.getElementById('submitBtn').disabled = true; document.getElementById('submitBtn').innerText = 'Sedang Menyimpan...';">
                 @csrf
                 @method('PUT')
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
                     <div>
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Merek</label>
@@ -75,11 +77,25 @@
                             <input type="text" name="model" value="{{ old('model', $car->model) }}"
                                 class="w-full rounded-md border-gray-300 shadow-sm" required>
                         </div>
+
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Harga (Rp)</label>
                             <input type="number" name="price" value="{{ old('price', $car->price) }}"
-                                class="w-full rounded-md border-gray-300 shadow-sm" required>
+                                class="w-full rounded-md border-gray-300 shadow-sm" required
+                                oninput="formatPricePreview(this.value)">
+                            <p class="text-xs text-brand-orange mt-1 font-bold" id="price_preview">Rp
+                                {{ number_format($car->price, 0, ',', '.') }}</p>
                         </div>
+
+                        <div class="mb-4">
+                            <label for="stock" class="block text-sm font-medium text-gray-700 mb-1">Stok Unit</label>
+                            <input type="number" name="stock" id="stock" value="{{ old('stock', 1) }}"
+                                min="0"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brand-orange focus:ring-brand-orange sm:text-sm"
+                                required>
+                            <p class="text-xs text-gray-500 mt-1">Masukkan 0 jika stok habis.</p>
+                        </div>
+                        
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Tahun</label>
                             <input type="number" name="year" value="{{ old('year', $car->year) }}"
@@ -122,31 +138,52 @@
                         </div>
 
                         <div class="mb-4 bg-gray-50 p-4 rounded-lg border border-gray-200">
-                            <label class="block text-sm font-bold text-gray-700 mb-2">Foto Utama (Thumbnail)</label>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Ganti Foto Utama</label>
                             <div class="flex items-center gap-4">
                                 <img src="{{ Storage::url($car->main_image) }}"
-                                    class="w-20 h-20 object-cover rounded-md border">
+                                    class="w-20 h-20 object-cover rounded-md border shadow-sm">
                                 <input type="file" name="main_image" class="text-sm text-gray-500">
                             </div>
                         </div>
 
-                        <div class="mb-4 bg-gray-50 p-4 rounded-lg border border-gray-200">
-                            <label class="block text-sm font-bold text-gray-700 mb-2">Tambah Galeri Baru</label>
-                            <input type="file" name="gallery_images[]" multiple
-                                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-orange file:text-white hover:file:bg-opacity-90">
-                            <p class="text-xs text-gray-500 mt-1">*Bisa pilih banyak foto sekaligus. Foto lama di atas tidak
-                                akan terhapus.</p>
+                        <div class="mb-4 bg-gray-50 p-4 rounded-xl border border-gray-200">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Tambah Foto Galeri Baru</label>
+
+                            <div class="flex items-center justify-center w-full mb-4">
+                                <label for="gallery-input"
+                                    class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white hover:bg-gray-50 transition-colors">
+                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <svg class="w-8 h-8 mb-2 text-gray-400" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                        </svg>
+                                        <p class="text-sm text-gray-500"><span
+                                                class="font-semibold text-brand-orange">Klik untuk tambah foto</span></p>
+                                        <p class="text-xs text-gray-400">Bisa pilih bertahap (tidak menimpa)</p>
+                                    </div>
+
+                                    <input id="gallery-input" type="file" class="hidden" multiple accept="image/*" />
+
+                                    <input type="file" name="gallery_images[]" id="gallery-final" class="hidden"
+                                        multiple />
+                                </label>
+                            </div>
+
+                            <div id="preview-container" class="grid grid-cols-3 gap-3">
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Deskripsi Lengkap</label>
                     <textarea name="description" rows="4" class="w-full rounded-md border-gray-300 shadow-sm" required>{{ old('description', $car->description) }}</textarea>
                 </div>
 
                 <div class="mt-8 border-t pt-6">
-                    <button type="submit"
+                    <button type="submit" id="submitBtn"
                         class="w-full bg-brand-dark text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-opacity-90 transition duration-150">
                         SIMPAN PERUBAHAN
                     </button>
@@ -154,4 +191,70 @@
             </form>
         </div>
     </div>
+
+    <script>
+        // 1. Script Harga Pintar
+        function formatPricePreview(value) {
+            const previewElement = document.getElementById('price_preview');
+            if (!value) {
+                previewElement.innerText = 'Rp 0';
+                return;
+            }
+            const number = parseFloat(value);
+            const rupiah = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(number);
+            let text = "";
+            if (number >= 1000000000) {
+                text = (number / 1000000000).toFixed(1).replace('.', ',') + " Miliar";
+            } else if (number >= 1000000) {
+                text = (number / 1000000).toFixed(0) + " Juta";
+            }
+            previewElement.innerText = `${rupiah}  (${text})`;
+        }
+
+        // 2. Script Upload Galeri Canggih
+        let container = new DataTransfer();
+        const inputPemicu = document.getElementById('gallery-input');
+        const inputFinal = document.getElementById('gallery-final');
+        const previewArea = document.getElementById('preview-container');
+
+        inputPemicu.addEventListener('change', function() {
+            let newFiles = this.files;
+            for (let i = 0; i < newFiles.length; i++) {
+                let file = newFiles[i];
+                container.items.add(file);
+
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = function() {
+                    let div = document.createElement('div');
+                    div.className =
+                        'relative group rounded-lg overflow-hidden border border-gray-200 aspect-square';
+                    div.innerHTML = `
+                        <img src="${reader.result}" class="w-full h-full object-cover">
+                        <button type="button" onclick="removeFile('${file.name}', this)" class="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 shadow-md hover:bg-red-600 transition-colors">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    `;
+                    previewArea.appendChild(div);
+                }
+            }
+            inputFinal.files = container.files;
+        });
+
+        window.removeFile = function(fileName, buttonElement) {
+            buttonElement.closest('div').remove();
+            let newContainer = new DataTransfer();
+            for (let i = 0; i < container.files.length; i++) {
+                if (container.files[i].name !== fileName) {
+                    newContainer.items.add(container.files[i]);
+                }
+            }
+            container = newContainer;
+            inputFinal.files = container.files;
+        }
+    </script>
 @endsection

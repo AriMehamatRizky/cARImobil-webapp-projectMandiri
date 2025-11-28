@@ -142,7 +142,7 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('profile.edit')">Profil</x-dropdown-link>
+                            <x-dropdown-link :href="route('profile.edit')">Edit Profil</x-dropdown-link>
 
                             <div class="border-t border-gray-100"></div>
                             <x-dropdown-link :href="route('home')">

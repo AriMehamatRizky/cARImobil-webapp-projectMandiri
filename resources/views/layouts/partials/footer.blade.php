@@ -1,59 +1,76 @@
-<footer class="bg-brand-dark text-gray-400 mt-16">
-    <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-                <span class="text-3xl font-bold text-white">c<span class="text-brand-orange">ARI</span>mobil</span>
-                <p class="mt-2 text-sm">Temukan Mobil Impianmu.</p>
+<footer class="bg-[#111] text-gray-400 border-t border-white/5 font-sans">
+    <div class="container mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+
+            <div class="space-y-4">
+                <a href="/" class="flex items-center gap-2">
+                    <img src="{{ asset('img/logocARImobil.png') }}"
+                        class="h-10 w-10 rounded-full grayscale hover:grayscale-0 transition-all duration-300">
+                    <span class="text-2xl font-bold text-white tracking-tight">c<span
+                            class="text-brand-orange">ARI</span>mobil</span>
+                </a>
+                <p class="text-sm leading-relaxed text-gray-500">
+                    Platform jual beli mobil terpercaya dengan pengalaman digital terbaik. Temukan mobil impian Anda
+                    dengan mudah, cepat, dan aman.
+                </p>
+                <div class="flex space-x-4 pt-2">
+                    <a href="#" class="text-gray-500 hover:text-white transition"><span
+                            class="sr-only">Facebook</span><svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg></a>
+                    <a href="#" class="text-gray-500 hover:text-white transition"><span
+                            class="sr-only">Instagram</span><svg class="h-5 w-5" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg></a>
+                </div>
             </div>
 
             <div>
-                <h3 class="text-sm font-semibold text-gray-100 tracking-wider uppercase">Navigasi</h3>
-                <ul class="mt-4 space-y-2">
-                    <li><a href="{{ route('home') }}" class="text-base hover:text-white transition duration-150">Home</a>
-                    </li>
+                <h3 class="text-white font-bold uppercase tracking-wider text-sm mb-6">Navigasi</h3>
+                <ul class="space-y-3">
+                    <li><a href="{{ route('home') }}"
+                            class="hover:text-brand-orange transition-colors duration-200">Beranda</a></li>
                     <li><a href="{{ route('cars.index') }}"
-                            class="text-base hover:text-white transition duration-150">Daftar Mobil</a></li>
-                    <li><a href="{{ route('login') }}"
-                            class="text-base hover:text-white transition duration-150">Login</a></li>
+                            class="hover:text-brand-orange transition-colors duration-200">Daftar Mobil</a></li>
                     <li><a href="{{ route('register') }}"
-                            class="text-base hover:text-white transition duration-150">Register</a></li>
+                            class="hover:text-brand-orange transition-colors duration-200">Daftar Akun</a></li>
+                    <li><a href="{{ route('login') }}"
+                            class="hover:text-brand-orange transition-colors duration-200">Masuk</a></li>
                 </ul>
             </div>
 
             <div>
-                <h3 class="text-sm font-semibold text-gray-100 tracking-wider uppercase">Kontak Kami</h3>
-                <ul class="mt-4 space-y-2">
-                    <li>
-                        <a href="https://wa.me/6281276988902?text=Halo%20cARImobil,%20saya%20tertarik%20dengan%20layanan%20Anda."
-                            target="_blank"
-                            class="flex items-center text-base hover:text-white transition duration-150 group">
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35"
-                                viewBox="0 0 48 48">
-                                <path fill="#fff"
-                                    d="M4.868,43.303l2.694-9.835C5.9,30.59,5.026,27.324,5.027,23.979C5.032,13.514,13.548,5,24.014,5c5.079,0.002,9.845,1.979,13.43,5.566c3.584,3.588,5.558,8.356,5.556,13.428c-0.004,10.465-8.522,18.98-18.986,18.98c-0.001,0,0,0,0,0h-0.008c-3.177-0.001-6.3-0.798-9.073-2.311L4.868,43.303z">
-                                </path>
-                                <path fill="#fff"
-                                    d="M4.868,43.803c-0.132,0-0.26-0.052-0.355-0.148c-0.125-0.127-0.174-0.312-0.127-0.483l2.639-9.636c-1.636-2.906-2.499-6.206-2.497-9.556C4.532,13.238,13.273,4.5,24.014,4.5c5.21,0.002,10.105,2.031,13.784,5.713c3.679,3.683,5.704,8.577,5.702,13.781c-0.004,10.741-8.746,19.48-19.486,19.48c-3.189-0.001-6.344-0.788-9.144-2.277l-9.875,2.589C4.953,43.798,4.911,43.803,4.868,43.803z">
-                                </path>
-                                <path fill="#cfd8dc"
-                                    d="M24.014,5c5.079,0.002,9.845,1.979,13.43,5.566c3.584,3.588,5.558,8.356,5.556,13.428c-0.004,10.465-8.522,18.98-18.986,18.98h-0.008c-3.177-0.001-6.3-0.798-9.073-2.311L4.868,43.303l2.694-9.835C5.9,30.59,5.026,27.324,5.027,23.979C5.032,13.514,13.548,5,24.014,5 M24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974 M24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974C24.014,42.974,24.014,42.974,24.014,42.974 M24.014,4C24.014,4,24.014,4,24.014,4C12.998,4,4.032,12.962,4.027,23.979c-0.001,3.367,0.849,6.685,2.461,9.622l-2.585,9.439c-0.094,0.345,0.002,0.713,0.254,0.967c0.19,0.192,0.447,0.297,0.711,0.297c0.085,0,0.17-0.011,0.254-0.033l9.687-2.54c2.828,1.468,5.998,2.243,9.197,2.244c11.024,0,19.99-8.963,19.995-19.98c0.002-5.339-2.075-10.359-5.848-14.135C34.378,6.083,29.357,4.002,24.014,4L24.014,4z">
-                                </path>
-                                <path fill="#40c351"
-                                    d="M35.176,12.832c-2.98-2.982-6.941-4.625-11.157-4.626c-8.704,0-15.783,7.076-15.787,15.774c-0.001,2.981,0.833,5.883,2.413,8.396l0.376,0.597l-1.595,5.821l5.973-1.566l0.577,0.342c2.422,1.438,5.2,2.198,8.032,2.199h0.006c8.698,0,15.777-7.077,15.78-15.776C39.795,19.778,38.156,15.814,35.176,12.832z">
-                                </path>
-                                <path fill="#fff" fill-rule="evenodd"
-                                    d="M19.268,16.045c-0.355-0.79-0.729-0.806-1.068-0.82c-0.277-0.012-0.593-0.011-0.909-0.011c-0.316,0-0.83,0.119-1.265,0.594c-0.435,0.475-1.661,1.622-1.661,3.956c0,2.334,1.7,4.59,1.937,4.906c0.237,0.316,3.282,5.259,8.104,7.161c4.007,1.58,4.823,1.266,5.693,1.187c0.87-0.079,2.807-1.147,3.202-2.255c0.395-1.108,0.395-2.057,0.277-2.255c-0.119-0.198-0.435-0.316-0.909-0.554s-2.807-1.385-3.242-1.543c-0.435-0.158-0.751-0.237-1.068,0.238c-0.316,0.474-1.225,1.543-1.502,1.859c-0.277,0.317-0.554,0.357-1.028,0.119c-0.474-0.238-2.002-0.738-3.815-2.354c-1.41-1.257-2.362-2.81-2.639-3.285c-0.277-0.474-0.03-0.731,0.208-0.968c0.213-0.213,0.474-0.554,0.712-0.831c0.237-0.277,0.316-0.475,0.474-0.791c0.158-0.317,0.079-0.594-0.04-0.831C20.612,19.329,19.69,16.983,19.268,16.045z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                            Hubungi via WhatsApp
-                        </a>
-                    </li>
+                <h3 class="text-white font-bold uppercase tracking-wider text-sm mb-6">Bantuan</h3>
+                <ul class="space-y-3">
+                    <li><a href="#" class="hover:text-brand-orange transition-colors duration-200">Syarat &
+                            Ketentuan</a></li>
+                    <li><a href="#" class="hover:text-brand-orange transition-colors duration-200">Kebijakan
+                            Privasi</a></li>
+                    <li><a href="#" class="hover:text-brand-orange transition-colors duration-200">Pusat
+                            Bantuan</a></li>
+                    <li><a href="#" class="hover:text-brand-orange transition-colors duration-200">Hubungi
+                            Kami</a></li>
                 </ul>
             </div>
+
+            <div>
+                <h3 class="text-white font-bold uppercase tracking-wider text-sm mb-6">Newsletter</h3>
+                <p class="text-sm text-gray-500 mb-4">Dapatkan info mobil terbaru setiap minggu.</p>
+                <form class="flex flex-col space-y-2">
+                    <input type="email" placeholder="Masukkan email Anda"
+                        class="bg-white/5 border border-white/10 text-white text-sm rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-brand-orange focus:border-transparent outline-none transition-all">
+                    <button type="button"
+                        class="bg-brand-orange text-white font-bold text-sm px-4 py-2.5 rounded-lg hover:bg-orange-600 transition-all">Langganan</button>
+                </form>
+            </div>
+
         </div>
 
-        <div class="mt-8 border-t border-gray-700 pt-8 text-center">
-            <p class="text-base">&copy; {{ date('Y') }} cARImobil. Ari Mehamat Rizky.</p>
+        <div class="mt-16 border-t border-white/10 pt-8 text-center">
+            <p class="text-sm text-gray-600">&copy; {{ date('Y') }} cARImobil Indonesia. All rights reserved.</p>
         </div>
     </div>
 </footer>
