@@ -36,7 +36,6 @@ class BrandSeeder extends Seeder
             'Lamborghini',
             'Land Rover',
             'Lexus',
-            'Mazda',
             'McLaren',
             'Rolls-Royce',
             'Tesla',

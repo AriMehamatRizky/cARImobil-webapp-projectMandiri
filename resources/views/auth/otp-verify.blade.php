@@ -1,4 +1,5 @@
 <x-guest-layout>
+    <!-- Judul Header -->
     <div class="mb-8 text-center">
         <div class="mx-auto w-16 h-16 bg-brand-orange/20 rounded-full flex items-center justify-center mb-4">
             <svg class="w-8 h-8 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -23,6 +24,9 @@
     <form method="POST" action="{{ route('otp.verify') }}" class="space-y-6">
         @csrf
 
+        <input type="hidden" name="email" value="{{ $email ?? session('otp_user_email') }}">
+
+        <!-- Input Kode OTP -->
         <div>
             <label for="otp_code" class="block text-sm font-medium text-gray-300 mb-2 text-center">Masukkan Kode 6
                 Digit</label>
@@ -30,19 +34,24 @@
             <input id="otp_code" type="text" name="otp_code" required autofocus maxlength="6"
                 class="w-full px-4 py-4 bg-black/30 border-2 border-white/10 rounded-2xl text-white placeholder-gray-600 text-center text-3xl font-bold tracking-[0.5em] focus:ring-4 focus:ring-brand-orange/30 focus:border-brand-orange transition-all"
                 placeholder="••••••"
-                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /> <x-input-error
-                :messages="$errors->get('otp_code')" class="mt-2 text-center" />
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+
+            <x-input-error :messages="$errors->get('otp_code')" class="mt-2 text-center" />
         </div>
 
+        <!-- Tombol Verifikasi -->
         <button type="submit"
             class="w-full py-4 px-4 bg-gradient-to-r from-brand-orange to-orange-600 hover:to-brand-orange text-white font-bold text-lg rounded-xl shadow-lg shadow-orange-500/30 transform hover:-translate-y-0.5 transition-all duration-200">
             {{ __('VERIFIKASI AKUN') }}
         </button>
     </form>
 
+    <!-- Footer Links -->
     <div class="text-center mt-8 space-y-4">
+        <!-- Form Kirim Ulang -->
         <form method="POST" action="{{ route('otp.resend') }}">
             @csrf
+            <input type="hidden" name="email" value="{{ $email ?? session('otp_user_email') }}">
             <p class="text-sm text-gray-400">Belum menerima kode?</p>
             <button type="submit"
                 class="text-brand-orange hover:text-white font-semibold transition-colors focus:outline-none underline mt-1">
@@ -50,6 +59,7 @@
             </button>
         </form>
 
+        <!-- Link Logout -->
         <div class="border-t border-white/10 pt-6">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

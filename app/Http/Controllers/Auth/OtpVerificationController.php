@@ -16,6 +16,11 @@ class OtpVerificationController extends Controller
      */
     public function show(Request $request)
     {
+        // Jika user sudah login, langsung lempar ke Home
+        if (Auth::check()) {
+            return redirect()->route('home');
+        }
+
         // Pastikan user datang dari halaman registrasi
         if (!$request->session()->has('otp_user_email')) {
             return redirect()->route('register');
@@ -52,20 +57,21 @@ class OtpVerificationController extends Controller
 
         // Verifikasi sukses!
         $user->forceFill([
-            'email_verified_at' => now(), // Tandai sebagai terverifikasi
-            'otp_code' => null,           // Hapus OTP
+            'email_verified_at' => now(),
+            'otp_code' => null,
             'otp_expires_at' => null,
         ])->save();
 
-        // Hapus email dari session
+        // Bersihkan session OTP
         $request->session()->forget('otp_user_email');
 
-        // Login-kan user
+        // Login user
         Auth::login($user);
 
-        return redirect()->intended(route('home'));
-    }
+        $request->session()->regenerate();
 
+        return redirect()->route('home');
+    }
     /**
      * Mengirim ulang kode OTP.
      */
